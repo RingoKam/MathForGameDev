@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif 
 
 // Make a look-at-trigger
 // Detect whether or not an object is looking at the trigger
@@ -13,7 +15,7 @@ public class LookAtTrigger : MonoBehaviour
 {
     public Transform target;
     public float dotProductResult;
-    [Range(0f,1f)]
+    [Range(0f, 1f)]
     public float Treshold = 0f;
 
     // Start is called before the first frame update
@@ -26,23 +28,24 @@ public class LookAtTrigger : MonoBehaviour
     void Update()
     {
     }
-    
+
+    #if UNITY_EDITOR
     void OnDrawGizmos()
     {
         var currentPos = this.transform.position;
         var targetPos = this.target.position;
-        
-        dotProductResult = Vector3.Dot(Vector3.forward, Vector3.Normalize(targetPos));        
-        // dotProductResult = currentPos.x * targetPos.x + currentPos.y * targetPos.y + currentPos.z * targetPos.z;  
 
-        if(dotProductResult > this.Treshold) 
+        dotProductResult = Vector3.Dot(Vector3.forward, Vector3.Normalize(targetPos - currentPos));
+        // dotProductResult = currentPos.x * targetPos.x + currentPos.y * targetPos.y + currentPos.z * targetPos.z;  
+        if (dotProductResult > this.Treshold)
         {
             Handles.color = Color.green;
         }
-        else 
+        else
         {
             Handles.color = Color.red;
         }
         Handles.DrawLine(this.transform.position, this.target.position);
     }
+    #endif
 }

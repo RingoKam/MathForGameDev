@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-
+#endif
 //Recreate the radial trigger we made on stream
 //Try to not look back at the stream, see if you can remember the concepts
 //Use OnDrawGizmos to draw a circle representing the radius
@@ -30,6 +31,7 @@ public class RadialTrigger : MonoBehaviour
     {
         
     }
+#if UNITY_EDITOR
 
     void OnDrawGizmos()
     {
@@ -53,4 +55,5 @@ public class RadialTrigger : MonoBehaviour
         }
         Handles.DrawWireDisc(origin, new Vector3(0,1,0), this.radius);
     }
+#endif
 }

@@ -25,8 +25,6 @@ public class LocalToWorld : MonoBehaviour
     public Transform localObj;
     public Transform WorldObj;
 
-    public Vector3 LocalToWorld;
-    public Vector3 WorldToLocal;
 
     // Start is called before the first frame update
     void Start()
